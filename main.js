@@ -3,6 +3,9 @@
 // all card contents
 var cards = document.querySelectorAll(".cell");
 
+// cards that not flipped
+
+
 // variable to check if first card get clicked
 var firstCardClicked = false;
 
@@ -12,10 +15,12 @@ var secondCardClicked = false;
 // temporary place folders to hold two cards that clicked
 var firstCard, secondCard;
 
-// adding event listner to all cards so that users can click card and flip
-for(let k of cards){
-    k.addEventListener("click", flipped);
-}
+
+
+// start game
+startGame()
+
+
 
 //main function 
     function flipped(){
@@ -66,10 +71,19 @@ for(let k of cards){
 
     // to make matched card flipped
     function noMoreFlip(){
-        firstCard.removeEventListener('click', flipped);
-        secondCard.removeEventListener('click', flipped);
+        doneCard(firstCard);
+        doneCard(secondCard)
         resetBoard();
-        console.log("hello")
+        // tracking how many cards remain unflipped
+        var unflippedCards = document.querySelectorAll("[data-state]")
+        // when remaining card === 2
+        if(unflippedCards.length===2){
+            // flip remaining 2cards
+            setTimeout(flipRemaining,500, unflippedCards);
+            // resetting game
+            setTimeout(resetGame, 3000, cards);
+        }
+         
     }
     
     // resetting cards clicking state every 2 cards got clicked
@@ -77,5 +91,35 @@ for(let k of cards){
         [firstCardClicked, secondCardClicked] = [false, false];
         [firstCard, secondCard] = [null, null];
     }
-        
-        
+    
+    // adding event listner to all cards so that users can click card and flip
+    function startGame(){
+        for(let k of cards){
+            k.addEventListener("click", flipped);
+            k.dataset.state = "undone"
+        }
+    }
+
+    function resetGame(arr){
+        // flip back all cards
+        for(let k of arr){
+            k.classList.remove("flip")
+        }
+        // resetting state of cards
+        resetBoard();
+        // adding lisner so user can restart again
+        startGame();
+    }
+    
+    // removing listner and lable the card as done
+    function doneCard(card){
+        card.removeEventListener('click', flipped);
+        card.removeAttribute('data-state')
+    }
+    
+    // flip remain two cards I may be able to get rid of it later...
+    function flipRemaining(arr){
+        for(let k of arr){
+            k.classList.add("flip")
+        }
+    }
