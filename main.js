@@ -1,7 +1,7 @@
 // GLOBAL VARIABLES
 
 // all card contents
-var cards = document.querySelectorAll(".cell");
+
 
 // cards that not flipped
 
@@ -18,7 +18,7 @@ var firstCard, secondCard;
 
 
 // start game
-startGame()
+
 
 
 
@@ -94,11 +94,10 @@ startGame()
     
     // adding event listner to all cards so that users can click card and flip
     function startGame(){
-        for(let k of cards){
+       for(let k of cards){
             k.addEventListener("click", flipped);
-            k.dataset.state = "undone"
         }
-    }
+     }
 
     function resetGame(arr){
         // flip back all cards
@@ -123,3 +122,50 @@ startGame()
             k.classList.add("flip")
         }
     }
+
+
+
+    const GAMEAREA = document.querySelector(".game-area")
+    var arr = [1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8]
+    for(let k of arr){
+        addCard(k);
+     }
+     var cards = document.querySelectorAll(".cell");
+     startGame()
+// adding individual card
+    function addCard (num){
+        var ACARD = createCard(num)
+        GAMEAREA.appendChild(ACARD);
+        
+    }
+
+        // creat card's back
+        function creatBack (num){
+            var newImgBack = document.createElement('img');
+            newImgBack.setAttribute('src', `images/${num}.gif`);
+            newImgBack.classList.add('back');
+            return newImgBack;
+        }
+
+        // create card's front
+        function creatFront(){
+            var newImgFront = document.createElement('img');
+            newImgFront.setAttribute('src', 'images/front.jpg');
+            newImgFront.classList.add('front')
+            return newImgFront;
+        }
+
+        // create individual card 
+        function createCard(k){
+            var individualCard = document.createElement('div');
+            var front = creatFront();
+            var back = creatBack(k);  
+            individualCard.classList.add('cell');
+            individualCard.dataset.number = `card${k}`
+            individualCard.dataset.state = 'undone'
+            individualCard.appendChild(back);
+            individualCard.appendChild(front);
+            return individualCard;
+        }
+    
+    
