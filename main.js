@@ -13,9 +13,10 @@ const GAMEAREA = document.querySelector(".game-area")
 
 // start game on load
 
-startGame()
+// startGame()
 
-
+var startButton = document.querySelector(".start-button")
+startButton.addEventListener('click', startGame)
 //main function 
     function flipped(){
     //    check if second card is clicked to prevent user click 3rd card
@@ -102,6 +103,8 @@ startGame()
     }
     
     function startGame(){
+    var greet = document.querySelector(".greeting")
+    greet.classList.toggle('greeting-off')
     var cardNumbers = shuffleCardNumber()
     for(let k of cardNumbers){
         addCard(k);
@@ -192,7 +195,9 @@ startGame()
         for(let k of arr){
             GAMEAREA.removeChild(k)
         }
-        startGame()
+        var greet = document.querySelector(".greeting")
+        greet.classList.toggle('greeting-off')
+        // startGame()
 
     }
 

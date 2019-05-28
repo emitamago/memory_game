@@ -13,12 +13,73 @@
                 display: flex;
             }
 
+            .side-bar{
+                width: 150px;
+                height: 250px;
+                margin: auto;
+                flex-wrap: wrap;
+                background-color: rgba(94, 128, 112, 0.3);
+                border-radius: 3px;
+                display: block;
+            }
+
+            .start, .score {
+                width: calc(100% -10px);
+                height: calc(25% - 10px);
+                background-color: rgba(57,128, 150, 0.3);
+                margin: 5px;
+                border-radius: 3px;
+                display: flex;
+
+            }
+            
+            .start-button{
+                flex-wrap: wrap;
+                margin: auto;
+                width: 70%;
+                height: 40%;
+                background-color: blueviolet;
+            }
+
+            .current-score{
+                flex-wrap: wrap;
+                margin: auto; 
+                background-color: blueviolet;
+            }
+
+            ul {
+                flex-wrap: wrap;
+                margin: auto; 
+                background-color: blueviolet;
+                
+            }
+            
+            li{
+                text-decoration: none;
+            }
+
+            .history{
+                
+                width: calc(100% -10px);
+                height: calc(50% - 10px);
+                background-color: rgba(57,128, 150, 0.3);
+                margin: 5px;
+                border-radius: 3px;
+                display: flex;
+
+            }
+            .greeting-off{
+                display: none;
+            }
+
             .game-area{
                 width: 250px;
                 height: 250px;
                 margin: auto;
                 display: flex;
                 flex-wrap: wrap;
+                background-color: rgba(94, 128, 112, 0.3);
+                border-radius: 3px;
             }
             .cell {
             width: calc(25% - 10px);
