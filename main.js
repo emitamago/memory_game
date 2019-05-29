@@ -36,7 +36,9 @@ startButton.addEventListener('click', startGame)
             // check if  newly clicked second card is not same card  as first card
             if(this !== firstCard){
                 // adding flipping css to the card
+                countScore();
                 this.classList.add("flip");
+                
                 // labeling the card 
                     if(!firstCardClicked){
                         firstCardClicked= true;
@@ -116,8 +118,10 @@ startButton.addEventListener('click', startGame)
     
     // count each click and update count
     function countScore(){
+        
         startScore++;
         score.innerText = startScore;
+        
     }
 
     
@@ -140,8 +144,7 @@ startButton.addEventListener('click', startGame)
     function addAction(arr){
         for(let k of arr){
              k.addEventListener("click", flipped);
-             k.addEventListener("click", countScore);
-
+           
          }
       }
 
