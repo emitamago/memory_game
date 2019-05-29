@@ -11,12 +11,16 @@ var firstCard, secondCard;
 // setting permanent place holder for cards
 const GAMEAREA = document.querySelector(".game-area")
 
-// start game on load
+// score holder
+var score = document.querySelector(".current-score")
 
-// startGame()
+// starting score
+ var startScore = 0;
+
 
 var startButton = document.querySelector(".start-button")
 startButton.addEventListener('click', startGame)
+
 //main function 
     function flipped(){
     //    check if second card is clicked to prevent user click 3rd card
@@ -102,20 +106,35 @@ startButton.addEventListener('click', startGame)
         
     }
     
+    function countScore(){
+        startScore++;
+        score.innerText = startScore;
+    }
+
+    
+    // staring game
     function startGame(){
     var greet = document.querySelector(".greeting")
     greet.classList.toggle('greeting-off')
+    
+    score.innerText = startScore;
     var cardNumbers = shuffleCardNumber()
     for(let k of cardNumbers){
         addCard(k);
      }
+     
      var cards = document.querySelectorAll(".cell");
      addAction(cards)
+     startButton.removeEventListener('click', startGame)
     }
+
+
     // adding event listner to all cards so that users can click card and flip
     function addAction(arr){
         for(let k of arr){
              k.addEventListener("click", flipped);
+             k.addEventListener("click", countScore);
+
          }
       }
 
@@ -151,6 +170,7 @@ startButton.addEventListener('click', startGame)
     // removing listner and lable the card as done
     function doneCard(card){
         card.removeEventListener('click', flipped);
+        card.removeEventListener('click', countScore);
         card.removeAttribute('data-state')
     }
 
@@ -197,10 +217,12 @@ startButton.addEventListener('click', startGame)
         }
         var greet = document.querySelector(".greeting")
         greet.classList.toggle('greeting-off')
-        // startGame()
+        startScore = 0
+        startButton.addEventListener('click', startGame)
 
     }
 
+    
     
     
         
