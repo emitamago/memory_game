@@ -17,7 +17,15 @@ var score = document.querySelector(".current-score")
 // starting score
  var startScore = 0;
 
+// score object and set localdata for score
+var scoreData = {};
+localStorage.setItem("scoreData", JSON.stringify(scoreData));
 
+//  labelling localdata
+ var scoreLabel = 0;
+
+
+// adding start functionality to start button
 var startButton = document.querySelector(".start-button")
 startButton.addEventListener('click', startGame)
 
@@ -106,6 +114,7 @@ startButton.addEventListener('click', startGame)
         
     }
     
+    // count each click and update count
     function countScore(){
         startScore++;
         score.innerText = startScore;
@@ -116,13 +125,11 @@ startButton.addEventListener('click', startGame)
     function startGame(){
     var greet = document.querySelector(".greeting")
     greet.classList.toggle('greeting-off')
-    
     score.innerText = startScore;
     var cardNumbers = shuffleCardNumber()
     for(let k of cardNumbers){
         addCard(k);
      }
-     
      var cards = document.querySelectorAll(".cell");
      addAction(cards)
      startButton.removeEventListener('click', startGame)
@@ -217,11 +224,32 @@ startButton.addEventListener('click', startGame)
         }
         var greet = document.querySelector(".greeting")
         greet.classList.toggle('greeting-off')
+        
+        saveScore(startScore);
+        displayScore();
+
         startScore = 0
         startButton.addEventListener('click', startGame)
-
     }
 
+    // saving current score and saving in local storage
+    function saveScore(num){
+        scoreLabel++
+        dataList = JSON.parse(localStorage.getItem("scoreData"));
+        
+        dataList[`score${scoreLabel}`]=num;
+        localStorage.setItem("scoreData", JSON.stringify(dataList));
+    }
+
+    // get lowest score in current session and update best score
+    function displayScore(){
+     var scoresObj = JSON.parse(localStorage.getItem("scoreData"));
+    var scores = Object.values(scoresObj)
+    var bestScore = scores.reduce((a,b)=>a<b?a:b)
+    var updateScore = document.querySelector(".bestscore")
+    updateScore.innerText=bestScore;
+     
+    }
     
     
     
