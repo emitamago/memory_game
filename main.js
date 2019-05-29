@@ -106,7 +106,9 @@ startButton.addEventListener('click', startGame)
         for(let i=1;i<=8;i++){arrayCardsNumber.push(i)}
         var arr1 = shuffle(arrayCardsNumber);
         var arr2 = shuffle(arrayCardsNumber);
-        return arr1.concat(arr2)
+        var doubleArrMix = shuffle(arr1.concat(arr2));
+        return doubleArrMix;
+        
         }
 
     // adding individual card
